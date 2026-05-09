@@ -1,0 +1,21 @@
+{
+  "random_seed": 42,
+  "split_sizes": {
+    "train": 3000,
+    "val": 500,
+    "test": 500,
+    "total": 4000
+  },
+  "data_leakage": {
+    "train_val": 3,
+    "train_test": 1,
+    "val_test": 0
+  },
+  "files": {
+    "train": "data/splits/train.jsonl",
+    "val": "data/splits/val.jsonl",
+    "test": "data/splits/test.jsonl"
+  },
+  "all_valid": true,
+  "ready_for_training": true
+}

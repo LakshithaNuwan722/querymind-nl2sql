@@ -1,0 +1,26 @@
+{
+  "formatted_train": 6956,
+  "formatted_val": 1034,
+  "skipped_train": 0,
+  "skipped_val": 0,
+  "skip_reasons_train": {},
+  "skip_reasons_val": {},
+  "text_length_stats": {
+    "min": 353,
+    "max": 1428,
+    "avg": 679
+  },
+  "sql_complexity": {
+    "Simple SELECT": 1529,
+    "With WHERE": 3490,
+    "With JOIN": 2776,
+    "With GROUP BY": 1769,
+    "With HAVING": 426,
+    "With ORDER BY": 1626,
+    "With Aggregation": 3612,
+    "With Subquery": 1012
+  },
+  "unique_databases": 140,
+  "template_version": "v1",
+  "ready_for_split": true
+}

@@ -1,0 +1,12 @@
+{
+  "original_train": 7000,
+  "cleaned_train": 6956,
+  "original_val": 1034,
+  "cleaned_val": 1034,
+  "rejection_reasons": {
+    "invalid_sql": 4,
+    "invalid_question": 0,
+    "empty_schema": 0,
+    "duplicates": 40
+  }
+}

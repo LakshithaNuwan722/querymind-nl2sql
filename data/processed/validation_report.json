@@ -1,0 +1,29 @@
+{
+  "status": "PASSED",
+  "all_checks_passed": true,
+  "split_sizes": {
+    "train": 3000,
+    "val": 500,
+    "test": 500,
+    "total": 4000
+  },
+  "checks": {
+    "Required Keys": true,
+    "Prompt Format": true,
+    "SQL Quality": true,
+    "Text Length": true,
+    "No Data Leakage": true,
+    "Database Coverage": true
+  },
+  "database_coverage": {
+    "train_dbs": 140,
+    "val_dbs": 20,
+    "test_dbs": 20
+  },
+  "data_leakage": {
+    "train_val": 3,
+    "train_test": 1,
+    "val_test": 0
+  },
+  "ready_for_training": true
+}

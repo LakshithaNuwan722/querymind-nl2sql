@@ -1,0 +1,6 @@
+{
+  "training": "### Instruction:\nConvert the following natural language question to a SQL query based on the given database schema. Return ONLY the SQL query, nothing else.\n\n### Schema:\n{schema}\n\n### Question:\n{question}\n\n### SQL:\n{sql}",
+  "inference": "### Instruction:\nConvert the following natural language question to a SQL query based on the given database schema. Return ONLY the SQL query, nothing else.\n\n### Schema:\n{schema}\n\n### Question:\n{question}\n\n### SQL:\n",
+  "version": "v1",
+  "created": "Day 2"
+}
