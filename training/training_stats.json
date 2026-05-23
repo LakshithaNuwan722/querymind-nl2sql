@@ -1,0 +1,18 @@
+{
+  "model_name": "lakshitha722/querymind-nl2sql",
+  "base_model": "unsloth/Llama-3.2-3B-Instruct",
+  "training_loss": 0.264,
+  "eval_loss": 0.7673,
+  "total_steps": 564,
+  "epochs": 3,
+  "train_samples": 3000,
+  "lora_r": 16,
+  "lora_alpha": 32,
+  "learning_rate": 0.0002,
+  "batch_size": 2,
+  "grad_accum": 8,
+  "hf_url": "https://huggingface.co/lakshitha722/querymind-nl2sql",
+  "wandb_url": "https://wandb.ai/lakshithanuwan722-other/querymind-nl2sql",
+  "dataset": "spider",
+  "status": "complete"
+}
