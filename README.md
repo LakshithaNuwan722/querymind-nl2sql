@@ -79,3 +79,39 @@ querymind-nl2sql/
               ▼                   ▼
         Validate SQL         Return to User
         (sql_validator) 
+
+📉 Training Curves
+Training Loss (per step):
+██▆▆▄▄▃▃▂▂▂▂▂▁▁▁▁▁▁▁
+2.0                 0.26
+
+Eval Loss (per checkpoint):
+▁▃▅▆▇█
+0.6              0.77
+
+Status: Converged ✅
+
+🧪 Sample Predictions
+Question : How many employees are there?
+Schema   : Database: company
+Generated: SELECT count(*) FROM employee   ✅
+
+Question : What is the average salary?
+Schema   : Database: hr
+Generated: SELECT avg(salary) FROM employees   ✅
+
+Question : List all departments ordered by name
+Schema   : Database: company
+Generated: SELECT department_name FROM department
+           ORDER BY department_name ASC   ✅
+
+📄 License
+Apache 2.0 - See LICENSE for details
+
+👤 Author
+Lakshitha
+
+🌐 LinkedIn : [your-linkedin-url]
+🤗 HuggingFace : huggingface.co/lakshitha722
+💻 GitHub : github.com/lakshithanuwan722
+<div align="center"> <i>Built with ❤️ using LLaMA 3.2 + QLoRA + Unsloth</i> </div> ```
