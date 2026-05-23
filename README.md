@@ -42,71 +42,19 @@
 
 ## 📁 Project Structure
 querymind-nl2sql/
-│
-├── 📁 data/
-│   ├── 📁 raw/
-│   │   ├── exploration_summary.json     ← dataset statistics
-│   │   ├── schema_lookup.json           ← DB schema info
-│   │   └── db_schema_info.json          ← raw schema data
-│   │
-│   ├── 📁 processed/
-│   │   ├── cleaned_train.json           ← cleaned training data
-│   │   ├── cleaned_val.json             ← cleaned validation data
-│   │   ├── formatted_train.json         ← formatted for training
-│   │   ├── formatted_val.json           ← formatted for validation
-│   │   ├── prompt_templates.json        ← prompt templates v1
-│   │   ├── cleaning_report.json         ← data cleaning report
-│   │   ├── format_report.json           ← formatting report
-│   │   ├── split_summary.json           ← split statistics
-│   │   └── validation_report.json       ← quality validation
-│   │
-│   ├── 📁 splits/
-│   │   ├── train.jsonl                  ← 3000 training samples
-│   │   ├── val.jsonl                    ← 500 validation samples
-│   │   └── test.jsonl                   ← 500 test samples (locked)
-│   │
-│   ├── explore_dataset.py               ← dataset exploration
-│   ├── load_data.py                     ← data loading
-│   ├── download_schema.py               ← schema downloader
-│   ├── clean_data.py                    ← data cleaning
-│   ├── format_data.py                   ← data formatting
-│   ├── split_data.py                    ← train/val/test splits
-│   └── validate_data.py                 ← quality validation
-│
-├── 📁 training/
-│   ├── 📁 configs/
-│   │   └── lora_config.json             ← LoRA hyperparameters
-│   │
-│   ├── 📁 notebooks/
-│   │   └── querymind_finetuning.ipynb   ← Colab training notebook
-│   │
-│   ├── training_stats.json              ← final training results
-│   └── TRAINING.md                      ← training documentation
-│
-├── 📁 evaluation/
-│   ├── 📁 baseline/
-│   │   ├── __init__.py
-│   │   ├── config.py                    ← baseline configuration
-│   │   ├── sql_validator.py             ← SQL validation logic
-│   │   ├── run_baseline.py              ← baseline testing script
-│   │   ├── baseline_llama_8b.json       ← Llama 8B results
-│   │   ├── baseline_llama_70b.json      ← Llama 70B results
-│   │   └── baseline_combined.json       ← combined comparison
-│   │
-│   ├── 📁 results/                      ← evaluation outputs
-│   ├── 📁 charts/                       ← comparison charts
-│   └── __init__.py
-│
-├── 📁 inference/
-│   ├── 📁 api/                          ← FastAPI endpoint (coming)
-│   └── 📁 demo/                         ← Gradio demo (coming)
-│
-├── 📁 monitoring/                        ← metrics + dashboards
-│
-├── 📄 .env                              ← API keys (not in git)
-├── 📄 .gitignore                        ← ignored files
-├── 📄 requirements.txt                  ← Python dependencies
-└── 📄 README.md                         ← this file
+├── data/
+│ ├── splits/ ← train/val/test JSONL
+│ └── processed/ ← cleaned data
+├── training/
+│ ├── configs/ ← LoRA config
+│ ├── notebooks/ ← Colab notebook
+│ └── training_stats.json
+├── evaluation/
+│ └── baseline/ ← baseline results
+├── inference/
+│ ├── api/ ← FastAPI (coming soon)
+│ └── demo/ ← Gradio (coming soon)
+└── README.md
 
 🏗️ Architecture
                     User Query
