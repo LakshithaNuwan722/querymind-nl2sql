@@ -78,4 +78,4 @@ querymind-nl2sql/
               ┌─────────┴─────────┐
               ▼                   ▼
         Validate SQL         Return to User
-        (sql_validator)
+        (sql_validator) 
