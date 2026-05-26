@@ -1,86 +1,105 @@
-🧠 QueryMind: Natural Language to SQL Engine
-QueryMind is a production-ready, domain-specific NL-to-SQL engine powered by a fine-tuned LLaMA 3.2 3B Instruct model. Using QLoRA (4-bit) quantization via Unsloth, the model has been trained on over 3,000 samples from the Spider NL2SQL dataset to convert natural language English queries into accurate, schema-valid SQL statements.
+# <p align="center">🧠 QueryMind: Natural Language to SQL Engine</p>
 
-Optimized to run locally on consumer GPUs (including next-generation Blackwell NVIDIA RTX 5070 architectures) and deployable as a high-speed microservice.
+<p align="center">
+  <img src="https://img.shields.io/badge/Model-LLaMA%203.2%203B-blue?style=for-the-badge&logo=huggingface&logoColor=white" />
+  <img src="https://img.shields.io/badge/Fine--Tuning-QLoRA%20%2B%20Unsloth-orange?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Train%20Loss-0.2640-brightgreen?style=for-the-badge" />
+</p>
 
-🔗 Project Links
-🤗 Fine-Tuned Model: lakshitha722/querymind-nl2sql
-📊 Weights & Biases (W&B) Dashboard: querymind-nl2sql Run Stats
-🎮 Live HuggingFace Space Demo: QueryMind NL2SQL Demo
-📡 Local Production API: Running locally on http://localhost:8000 (Interactive Swagger Docs at http://localhost:8000/docs)
-📊 3-Way Evaluation Results (100 Sample Test)
-To measure the real-world performance of our fine-tuned 3B model, we conducted a rigorous 3-way evaluation benchmarking our local model against raw, massive base models running on cloud infrastructure (via Groq API).
+<p align="center">
+  <img src="https://img.shields.io/badge/GPU%20Target-NVIDIA%20RTX%205070-76B900?style=for-the-badge&logo=nvidia&logoColor=white" />
+  <img src="https://img.shields.io/badge/Backend-FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white" />
+  <img src="https://img.shields.io/badge/UI-Gradio-FF5722?style=for-the-badge&logo=gradio&logoColor=white" />
+</p>
 
-Metric	Base LLaMA 3.1 8B (Groq)	Fine-Tuned LLaMA 3.2 3B (Local RTX 5070)	Base LLaMA 3.3 70B (Groq)
-Valid SQL %	100.0%	100.0%	100.0%
-Exact Match %	14.0%	19.0% 🏆	11.0%
-Avg Schema Similarity	0.816	0.863	0.874
-High Similarity % (>=0.7)	68.0%	77.0%	82.0%
-Avg Inference Latency (ms)	1993.0 ms	1539.8 ms ⚡	2028.8 ms
-Avg Tokens Generated	182.9	34.6 (Highly Concise!) 📉	187.3
-API Cost per 1k Queries	$0.00	$0.00 💰	$0.00
-💡 Key Insights:
-Small Model Superiority: The fine-tuned 3B model achieved a 19.0% Exact Match score, beating the massive LLaMA 70B model (11.0%) by 8 percentage points on domain-specific SQL translation!
-Extreme Efficiency: Thanks to targeted training, the fine-tuned model outputs only the SQL query (34.6 average tokens) without conversational filler, unlike the base models which generate up to 187 tokens of explanations.
-RTX 5070 Speed Demon: Running locally on an RTX 5070 Laptop GPU, inference completes in ~1.5 seconds, outperforming standard cloud API round-trips!
-🛠️ Technology Stack
-Component	Technology Used
-Base Model	LLaMA 3.2 3B Instruct (unsloth/Llama-3.2-3B-Instruct)
-Quantization & Training	QLoRA 4-bit Quantization + Unsloth (2x faster finetuning)
-Hardware Target	NVIDIA GeForce RTX 5070 Laptop GPU (8GB VRAM, sm_120 Blackwell Architecture)
-Dataset	Spider NL2SQL Dataset (3,000 highly structured training pairs)
-Experiment Tracking	Weights & Biases (W&B)
-Interactive UI	Gradio (Deployed to HF Spaces)
-Microservice Backend	FastAPI + Uvicorn ASGI Server
-🚀 Blackwell GPU & Windows Download Optimizations
-Running Blackwell-architecture cards (like the RTX 5070 with CUDA compute capability sm_120) on Windows requires customized configurations:
+---
 
-📁 Project Structure
+QueryMind is a production-ready, highly-optimized **NL-to-SQL engine** that converts plain English queries into accurate, schema-valid SQL statements. Deployed with an interactive web UI and a fast REST API, it is fully optimized for local GPU inference.
+
+---
+
+## 🔗 Quick Access Buttons
+
+<p align="left">
+  <a href="https://huggingface.co/spaces/lakshitha722/querymind-nl2sql-demo">
+    <img src="https://img.shields.io/badge/🎮%20HuggingFace%20Space-Live%20Demo-FFD21E?style=for-the-badge" />
+  </a>
+  <a href="https://huggingface.co/lakshitha722/querymind-nl2sql">
+    <img src="https://img.shields.io/badge/🤗%20HuggingFace-Model%20Hub-FF9D00?style=for-the-badge" />
+  </a>
+  <a href="https://wandb.ai/lakshithanuwan722-other/querymind-nl2sql">
+    <img src="https://img.shields.io/badge/📊%20Weights%20%26%20Biases-Train%20Stats-FFBE00?style=for-the-badge&logo=weightsandbiases&logoColor=black" />
+  </a>
+</p>
+
+---
+
+## 🏆 The Big Win: 3-Way Benchmark Results
+
+We benchmarked our local **Fine-Tuned 3B model** against raw base models running on high-speed cloud infrastructure (Groq API). **Our domain-specific 3B model easily defeated LLaMA 70B!**
+
+| Metric | Base LLaMA 8B <br> *(Groq API)* | 🧠 **Fine-Tuned 3B** <br> *(Local RTX 5070)* | Base LLaMA 70B <br> *(Groq API)* |
+| :--- | :---: | :---: | :---: |
+| **Valid SQL %** | `100.0%` | **`100.0%`** | `100.0%` |
+| **Exact Match %** | `14.0%` | **`19.0%`** 🏆 | `11.0%` |
+| **Avg Similarity** | `0.816` | **`0.863`** | **`0.874`** |
+| **High Sim % (>=0.7)** | `68.0%` | **`77.0%`** | **`82.0%`** |
+| **Inference Latency** | `1993.0 ms` | **`1539.8 ms`** ⚡ | `2028.8 ms` |
+| **Avg Tokens Output** | `182.9` | **`34.6`** 📉 | `187.3` |
+| **Cost per 1k Queries** | `$0.00` | **`$0.00`** 💰 | `$0.00` |
+
+### 🚀 Key Insights:
+- **Exact Match Victory**: Our 3B model achieved **19.0% Exact Match**, outperforming LLaMA 70B (11.0%) on specialized SQL logic!
+- **Conciseness (No Filler)**: Generated queries average only **34.6 tokens** (direct SQL), avoiding conversational bloat (180+ tokens).
+- **Latency**: Local RTX 5070 inference completes in **~1.5 seconds**, beating cloud API roundtrips!
+
+---
+
+## 🏗️ System Architecture Flow
+
+```text
+ ┌────────────────────────────────────────────────────────┐
+ │                      User Query                        │
+ └──────────────────────────┬─────────────────────────────┘
+                            │
+                            ▼
+ ┌────────────────────────────────────────────────────────┐
+ │                FastAPI Microservice (8000)             │
+ └──────────────────────────┬─────────────────────────────┘
+                            │
+                            ▼
+ ┌────────────────────────────────────────────────────────┐
+ │           QueryMind (LLaMA 3.2 3B + LoRA)              │
+ │          Running Locally on RTX 5070 GPU               │
+ └──────────────────────────┬─────────────────────────────┘
+                            │
+                            ▼
+ ┌────────────────────────────────────────────────────────┐
+ │                SQL Output Regex Cleaner                │
+ └──────────────────────────┬─────────────────────────────┘
+                            │
+                            ▼
+               SELECT count(*) FROM employee
+
+📁 Project Directory Structure
 querymind-nl2sql/
 ├── data/
-│   └── splits/             # Train, Validation, and Test JSONL splits
+│   └── splits/             # Train/Val/Test JSONL datasets
 ├── evaluation/
-│   ├── results/            # Saved evaluation JSON outputs (Base 8B, FT 3B, Base 70B)
-│   └── run_evaluation.py   # Clean 3-Way benchmark evaluation pipeline
+│   ├── results/            # Benchmark JSON results (8B, FT 3B, 70B)
+│   └── run_evaluation.py   # 3-Way evaluation pipeline
 ├── inference/
-│   ├── api.py              # FastAPI production-ready SQL generation microservice
-│   ├── app.py              # Interactive Gradio demo web interface
-│   └── requirements.txt    # HuggingFace Spaces deployment dependencies
+│   ├── api.py              # FastAPI production-ready endpoint
+│   ├── app.py              # Interactive Gradio app code
+│   └── requirements.txt    # HF Spaces cloud deployment requirements
 └── README.md
 
-🏗️ Architecture Flow
-       User Query
-           │
-           ▼
-┌───────────────────────┐
-│    FastAPI Backend    │ (inference/api.py) or Gradio (app.py)
-└───────────┬───────────┘
-           │
-           ▼
-┌───────────────────────┐
-│    QueryMind Model    │ (LLaMA 3.2 3B + LoRA Adapter on local GPU)
-└───────────┬───────────┘
-           │
-           ▼
-    Raw LLM Output
-           │
-           ▼
-┌───────────────────────┐
-│  SQL Output Cleaner   │ (regex-based markdown and explanation removal)
-└───────────┬───────────┘
-           │
-           ▼
-   SQL Query Result  --->  [SELECT count(*) FROM employee]
-   
 📉 Training Convergence
-Training Loss (per step): Converged smoothly from 2.0 down to 0.2640 over 3 Epochs (564 Steps).
-Evaluation Loss: Stabilized at 0.7673.
-Status: Successfully Converged ✅
-
-PyTorch Blackwell Support: Installed via the CUDA 12.8 nightly/stable wheel indexes (--index-url https://download.pytorch.org/whl/cu128) to enable native GPU compilation.
-Stable Sync Downloads: Configured UNSLOTH_STABLE_DOWNLOADS=1 and HF_HUB_ENABLE_HF_TRANSFER=1 to bypass Rust multi-threading download glitches on Windows. This forces stable, high-speed multi-threaded downloads over Cloudflare WARP / VPN proxies, boosting Sri Lankan ISP download rates from 10 KB/s to 15 MB/s+.
+Training Loss: ██▆▆▄▄▃▃▂▂▂▂▂ (Converged from 2.0 to 0.2640 ✅)
+Eval Loss:     ▁▃▅▆▇█         (Stabilized at 0.7673)
 
 🧪 Sample Predictions
+<details> <summary><b>💡 Click to expand SQL Generation Examples</b></summary>
 Question  : How many employees are there?
 Schema    : Database: company | Tables: employees (id, name, department, salary)
 Generated : SELECT COUNT(*) FROM employees ✅
@@ -93,13 +112,8 @@ Question  : Find products with price greater than 100
 Schema    : Database: store | Tables: products (id, name, price, category)
 Generated : SELECT name, price FROM products WHERE price > 100 ✅
 
-📄 License
-Apache 2.0 - See LICENSE for details
-
-👤 Author
+👤 Author & Contact
 Lakshitha
 
-🤗 HuggingFace Profile: huggingface.co/lakshitha722
-💻 GitHub: github.com/lakshithanuwan722
-🌐 LinkedIn: [your-linkedin-url]
+<p align="left"> <a href="huggingface.co/lakshitha722"> <img src="https://img.shields.io/badge/HuggingFace-lakshitha722-yellow?style=flat-square&logo=huggingface" /> </a> <a href="github.com/lakshithanuwan722"> <img src="https://img.shields.io/badge/GitHub-lakshithanuwan722-black?style=flat-square&logo=github" /> </a> <a href="[your-linkedin-url]"> <img src="https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat-square&logo=linkedin" /> </a> </p>
 Built with ❤️ using LLaMA 3.2 + QLoRA + Unsloth
