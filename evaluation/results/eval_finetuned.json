@@ -1,0 +1,917 @@
+{
+  "summary": {
+    "label": "Fine-tuned LLaMA 3B",
+    "total": 100,
+    "valid_sql_pct": 100.0,
+    "exact_match_pct": 19.0,
+    "avg_similarity": 0.863,
+    "high_sim_count": 77,
+    "high_sim_pct": 77.0,
+    "avg_latency_ms": 1539.8,
+    "total_tokens": 3463,
+    "avg_tokens": 34.6,
+    "errors": 0
+  },
+  "predictions": [
+    {
+      "question": "Return the first name, last name and email of the owners living in a state whose name contains the substring 'North'.?",
+      "reference": "SELECT first_name , last_name , email_address FROM Owners WHERE state LIKE '%North%'",
+      "generated": "SELECT T1.first_name,  T1.last_name,  T1.email_address FROM Owners AS T1 JOIN States AS T2 ON T1.state_id  =  T2.state_id WHERE T2.name LIKE '%North%",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.85,
+      "latency_ms": 4168.9
+    },
+    {
+      "question": "What are the first names of all players, and their average rankings?",
+      "reference": "SELECT AVG(ranking) , T1.first_name FROM players AS T1 JOIN rankings AS T2 ON T1.player_id = T2.player_id GROUP BY T1.first_name",
+      "generated": "SELECT first_name,  avg(rank) FROM players GROUP BY first_name ORDER BY avg(rank) DESC",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.6,
+      "latency_ms": 921.9
+    },
+    {
+      "question": "How many pets are owned by students that have an age greater than 20?",
+      "reference": "SELECT COUNT(*) FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid WHERE T1.age > 20",
+      "generated": "SELECT count(*) FROM has_pet AS T1 JOIN student AS T2 ON T1.stuid  =  T2.stuid WHERE T2.age  >  20",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 1691.5
+    },
+    {
+      "question": "What is the episode for the TV series named \"Sky Radio\"?",
+      "reference": "SELECT T2.Episode FROM TV_Channel AS T1 JOIN TV_series AS T2 ON T1.id = T2.Channel WHERE T1.series_name = \"Sky Radio\"",
+      "generated": "SELECT Episode FROM TV_series WHERE series_name  =  \"Sky Radio",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.65,
+      "latency_ms": 804.3
+    },
+    {
+      "question": "Count the number of distinct store locations.?",
+      "reference": "SELECT COUNT(DISTINCT LOCATION) FROM shop",
+      "generated": "SELECT count(DISTINCT LOCATION) FROM shop",
+      "valid": true,
+      "exact": true,
+      "similarity": 1.0,
+      "latency_ms": 487.2
+    },
+    {
+      "question": "Who is enrolled in a Bachelor degree program? List the first name, middle name, last name.?",
+      "reference": "SELECT DISTINCT T1.first_name , T1.middle_name , T1.last_name FROM Students AS T1 JOIN Student_Enrolment AS T2 ON T1.student_id = T2.student_id JOIN Degree_Programs AS T3 ON T2.degree_program_id = T3.degree_program_id WHERE T3.degree_summary_name = 'Bachelor'",
+      "generated": "SELECT T1.first_name,  T1.middle_name,  T1.last_name FROM Students AS T1 JOIN Student_Enrolment AS T2 ON T1.student_id  =  T2.student_id JOIN Degree_Programs AS T3 ON T3.degree_program_id  =  T2.degree_program_id WHERE T3.degree_program_name  =  'Bachelor",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.8,
+      "latency_ms": 3177.2
+    },
+    {
+      "question": "Which model saves the most gasoline? That is to say, have the maximum miles per gallon.?",
+      "reference": "SELECT T1.Model FROM CAR_NAMES AS T1 JOIN CARS_DATA AS T2 ON T1.MakeId = T2.Id ORDER BY T2.mpg DESC LIMIT 1",
+      "generated": "SELECT Model FROM cars_data ORDER BY MilesPerGallon DESC LIMIT 1",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.65,
+      "latency_ms": 680.7
+    },
+    {
+      "question": "What are the id and names of the countries which have more than 3 car makers or produce the 'fiat' model?",
+      "reference": "SELECT T1.countryId , T1.CountryName FROM Countries AS T1 JOIN CAR_MAKERS AS T2 ON T1.CountryId = T2.Country GROUP BY T1.countryId HAVING COUNT(*) > 3 UNION SELECT T1.countryId , T1.CountryName FROM Countries AS T1 JOIN CAR_MAKERS AS T2 ON T1.CountryId = T2.Country JOIN MODEL_LIST AS T3 ON T2.Id = T3.Maker WHERE T3.Model = 'fiat'",
+      "generated": "SELECT T1.countryid,  T1.countryname FROM Countries AS T1 JOIN car_makers AS T2 ON T1.countryid  =  T2.countryid GROUP BY T1.countryid HAVING count(*)  >  3 UNION SELECT T1.countryid,  T1.countryname FROM Countries AS T1 JOIN car_makers AS T2 ON T1.countryid  =  T2.countryid JOIN car_names AS T3 ON T2.makeid  =  T3.makeid WHERE T3.model  =  'fiat' GROUP BY T1.countryid HAVING count(*)  >  3",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.867,
+      "latency_ms": 5328.6
+    },
+    {
+      "question": "What is the semester which most student registered in? Show both the name and the id.?",
+      "reference": "SELECT T1.semester_name , T1.semester_id FROM Semesters AS T1 JOIN Student_Enrolment AS T2 ON T1.semester_id = T2.semester_id GROUP BY T1.semester_id ORDER BY COUNT(*) DESC LIMIT 1",
+      "generated": "SELECT semester_name,  semester_id FROM Student_Enrolment GROUP BY semester_id ORDER BY count(*) DESC LIMIT 1",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.7,
+      "latency_ms": 1131.6
+    },
+    {
+      "question": "Count the number of paragraphs.?",
+      "reference": "SELECT COUNT(*) FROM Paragraphs",
+      "generated": "SELECT count(*) FROM Paragraphs",
+      "valid": true,
+      "exact": true,
+      "similarity": 1.0,
+      "latency_ms": 383.7
+    },
+    {
+      "question": "For model volvo, how many cylinders does the car with the least accelerate have?",
+      "reference": "SELECT T1.cylinders FROM CARS_DATA AS T1 JOIN CAR_NAMES AS T2 ON T1.Id = T2.MakeId WHERE T2.Model = 'volvo' ORDER BY T1.accelerate ASC LIMIT 1",
+      "generated": "SELECT min(T1.Accelerate),  T1.Cylinders FROM cars_data AS T1 JOIN car_names AS T2 ON T1.Model  =  T2.Model WHERE T2.Name  =  \"volvo\" GROUP BY T1.Cylinders",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.743,
+      "latency_ms": 2166.8
+    },
+    {
+      "question": "List the names of teachers in ascending order of age.?",
+      "reference": "SELECT Name FROM teacher ORDER BY Age ASC",
+      "generated": "SELECT Name FROM teacher ORDER BY Age ASC",
+      "valid": true,
+      "exact": true,
+      "similarity": 1.0,
+      "latency_ms": 436.1
+    },
+    {
+      "question": "Which airlines have at least 10 flights?",
+      "reference": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid = T2.Airline GROUP BY T1.Airline HAVING COUNT(*) > 10",
+      "generated": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.Airline  =  T2.Airline GROUP BY T1.Airline HAVING count(*)  >=  10",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 2020.9
+    },
+    {
+      "question": "Find the name of tourney that has more than 10 matches.?",
+      "reference": "SELECT tourney_name FROM matches GROUP BY tourney_name HAVING COUNT(*) > 10",
+      "generated": "SELECT tourney_name FROM matches GROUP BY tourney_name HAVING count(*)  >  10",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 922.4
+    },
+    {
+      "question": "Find the name and age of the visitor who bought the most tickets at once.?",
+      "reference": "SELECT t1.name , t1.age FROM visitor AS t1 JOIN visit AS t2 ON t1.id = t2.visitor_id ORDER BY t2.num_of_ticket DESC LIMIT 1",
+      "generated": "SELECT T1.name,  T2.age FROM visitor AS T1 JOIN visit AS T2 ON T1.id  =  T2.visitor_id GROUP BY T2.visitor_id ORDER BY sum(T2.num_of_ticket) DESC LIMIT 1",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.8,
+      "latency_ms": 2172.8
+    },
+    {
+      "question": "What are the names and descriptions for all the sections?",
+      "reference": "SELECT section_name , section_description FROM Sections",
+      "generated": "SELECT T1.section_name,  T1.section_description FROM Sections AS T1 JOIN Courses AS T2 ON T1.course_id  =  T2.course_id GROUP BY T1.section_name,  T1.section_description",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.7,
+      "latency_ms": 1893.2
+    },
+    {
+      "question": "How many car makers are there in each continents? List the continent name and the count.?",
+      "reference": "SELECT T1.Continent , COUNT(*) FROM CONTINENTS AS T1 JOIN COUNTRIES AS T2 ON T1.ContId = T2.continent JOIN car_makers AS T3 ON T2.CountryId = T3.Country GROUP BY T1.Continent",
+      "generated": "SELECT T1.Continent,  count(*) FROM CONTINENTS AS T1 JOIN car_makers AS T2 ON T1.ContId  =  T2.ContId GROUP BY T1.Continent",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.867,
+      "latency_ms": 1900.7
+    },
+    {
+      "question": "Find the first name of the students who permanently live in the country Haiti or have the cell phone number 09700166582 .?",
+      "reference": "SELECT t1.first_name FROM students AS t1 JOIN addresses AS t2 ON t1.permanent_address_id = t2.address_id WHERE t2.country = 'haiti' OR t1.cell_mobile_number = '09700166582'",
+      "generated": "SELECT first_name FROM Students WHERE country_code  =  \"HT\" OR cell_mobile_number  =  \"09700166582",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.68,
+      "latency_ms": 1142.3
+    },
+    {
+      "question": "Find all airlines that have at least 10 flights.?",
+      "reference": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid = T2.Airline GROUP BY T1.Airline HAVING COUNT(*) > 10",
+      "generated": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.Airline  =  T2.Airline GROUP BY T1.Airline HAVING count(*)  >=  10",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 2068.7
+    },
+    {
+      "question": "List the first name of all the professionals along with the description of the treatment they have done.?",
+      "reference": "SELECT DISTINCT T1.first_name , T3.treatment_type_description FROM professionals AS T1 JOIN Treatments AS T2 ON T1.professional_id = T2.professional_id JOIN Treatment_types AS T3 ON T2.treatment_type_code = T3.treatment_type_code",
+      "generated": "SELECT T1.first_name,  T2.treatment_description FROM Professionals AS T1 JOIN Treatments AS T2 ON T1.professional_id  =  T2.professional_id JOIN Treatment_types AS T3 ON T2.treatment_type_id  =  T3.treatment_type_id JOIN Charges AS T4 ON T2.charge_id  =  T4.charge_id WHERE T4.charge_type  =  \"Treatment\" GROUP BY T1.first_name,  T2.treatment_description ORDER BY T1.first_name,  T2.treatment_description",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.657,
+      "latency_ms": 4526.1
+    },
+    {
+      "question": "What are the towns from which at least two teachers come from?",
+      "reference": "SELECT Hometown FROM teacher GROUP BY Hometown HAVING COUNT(*) >= 2",
+      "generated": "SELECT Hometown FROM teacher GROUP BY Hometown HAVING count(*)  >=  2",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 788.4
+    },
+    {
+      "question": "Find the number of cartoons directed by each of the listed directors.?",
+      "reference": "SELECT COUNT(*) , Directed_by FROM cartoon GROUP BY Directed_by",
+      "generated": "SELECT count(*),  directed_by FROM cartoon GROUP BY directed_by",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 710.1
+    },
+    {
+      "question": "Count the number of different nationalities.?",
+      "reference": "SELECT COUNT(DISTINCT Nationality) FROM people",
+      "generated": "SELECT count(DISTINCT Nationality) FROM people",
+      "valid": true,
+      "exact": true,
+      "similarity": 1.0,
+      "latency_ms": 677.3
+    },
+    {
+      "question": "What are the names of the sections in reverse alphabetical order?",
+      "reference": "SELECT section_name FROM Sections ORDER BY section_name DESC",
+      "generated": "SELECT section_name FROM Sections ORDER BY section_name ASC",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 747.0
+    },
+    {
+      "question": "Return the average attendance across all shows.?",
+      "reference": "SELECT AVG(Attendance) FROM SHOW",
+      "generated": "SELECT avg(Attendance) FROM SHOW",
+      "valid": true,
+      "exact": true,
+      "similarity": 1.0,
+      "latency_ms": 644.7
+    },
+    {
+      "question": "Show all document names using templates with template type code BK.?",
+      "reference": "SELECT T2.document_name FROM Templates AS T1 JOIN Documents AS T2 ON T1.template_id = T2.template_id WHERE T1.template_type_code = \"BK\"",
+      "generated": "SELECT document_name FROM Documents WHERE template_type_code  =  \"BK\" GROUP BY document_name",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.56,
+      "latency_ms": 1096.0
+    },
+    {
+      "question": "What are the names of the countries with no car makers?",
+      "reference": "SELECT CountryName FROM countries EXCEPT SELECT T1.CountryName FROM countries AS T1 JOIN CAR_MAKERS AS T2 ON T1.countryId = T2.Country",
+      "generated": "SELECT countryname FROM Countries EXCEPT SELECT T2.countryname FROM CAR_MAKERS AS T1 JOIN Countries AS T2 ON T1.countryid  =  T2.countryid GROUP BY T2.countryname",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.88,
+      "latency_ms": 2591.3
+    },
+    {
+      "question": "Which airlines have less than 200 flights?",
+      "reference": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid = T2.Airline GROUP BY T1.Airline HAVING COUNT(*) < 200",
+      "generated": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.Airline  =  T2.Airline GROUP BY T1.Airline HAVING count(*)  <  200",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 2560.8
+    },
+    {
+      "question": "What are the names of all cartoons directed by Ben Jones?",
+      "reference": "SELECT Title FROM Cartoon WHERE Directed_by = \"Ben Jones\"",
+      "generated": "SELECT T1.title FROM cartoon AS T1 JOIN directed_by AS T2 ON T1.id  =  T2.cartoon_id JOIN director AS T3 ON T2.director_id  =  T3.id WHERE T3.name  =  \"Ben Jones",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.85,
+      "latency_ms": 2357.6
+    },
+    {
+      "question": "What is the average expected life expectancy for countries in the region of Central Africa?",
+      "reference": "SELECT AVG(LifeExpectancy) FROM country WHERE Region = \"Central Africa\"",
+      "generated": "SELECT avg(LifeExpectancy) FROM country WHERE Region  =  \"Central Africa",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 1132.9
+    },
+    {
+      "question": "What are the countries where either English or Dutch is the official language ?",
+      "reference": "SELECT t1.name FROM country AS t1 JOIN countrylanguage AS t2 ON t1.code = t2.countrycode WHERE t2.language = \"english\" AND isofficial = \"t\" UNION SELECT t1.name FROM country AS t1 JOIN countrylanguage AS t2 ON t1.code = t2.countrycode WHERE t2.language = \"dutch\" AND isofficial = \"t\"",
+      "generated": "SELECT DISTINCT CountryCode FROM countrylanguage WHERE LANGUAGE  =  \"English\" OR LANGUAGE  =  \"Dutch",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.6,
+      "latency_ms": 1436.7
+    },
+    {
+      "question": "What is the id and type code for the template used by the most documents?",
+      "reference": "SELECT T1.template_id , T2.Template_Type_Code FROM Documents AS T1 JOIN Templates AS T2 ON T1.template_id = T2.template_id GROUP BY T1.template_id ORDER BY COUNT(*) DESC LIMIT 1",
+      "generated": "SELECT T1.document_id,  T1.template_type_code FROM Documents AS T1 JOIN Templates AS T2 ON T1.template_id  =  T2.template_id GROUP BY T1.document_id ORDER BY count(*) DESC LIMIT 1",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 2310.8
+    },
+    {
+      "question": "List each charge type and its amount.?",
+      "reference": "SELECT charge_type , charge_amount FROM Charges",
+      "generated": "SELECT charge_type,  charge_amount FROM Charges GROUP BY charge_type ORDER BY charge_amount DESC",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.7,
+      "latency_ms": 825.1
+    },
+    {
+      "question": "What are the death and injury situations caused by the ship with tonnage 't'?",
+      "reference": "SELECT T1.killed , T1.injured FROM death AS T1 JOIN ship AS t2 ON T1.caused_by_ship_id = T2.id WHERE T2.tonnage = 't'",
+      "generated": "SELECT T2.death,  T2.injured FROM ship AS T1 JOIN death AS T2 ON T1.id  =  T2.ship_id WHERE T1.tonnage  =  't",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 1848.2
+    },
+    {
+      "question": "Find the name of the makers that produced some cars in the year of 1970?",
+      "reference": "SELECT DISTINCT T1.Maker FROM CAR_MAKERS AS T1 JOIN MODEL_LIST AS T2 ON T1.Id = T2.Maker JOIN CAR_NAMES AS T3 ON T2.model = T3.model JOIN CARS_DATA AS T4 ON T3.MakeId = T4.id WHERE T4.year = '1970'",
+      "generated": "SELECT T1.Maker FROM car_makers AS T1 JOIN cars_data AS T2 ON T1.Maker  =  T2.MakeId WHERE T2.Year  =  1970 GROUP BY T1.Maker",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.6,
+      "latency_ms": 2219.0
+    },
+    {
+      "question": "Which student has enrolled for the most times in any program? List the id, first name, middle name, last name, the number of enrollments and student id.?",
+      "reference": "SELECT T1.student_id , T1.first_name , T1.middle_name , T1.last_name , COUNT(*) , T1.student_id FROM Students AS T1 JOIN Student_Enrolment AS T2 ON T1.student_id = T2.student_id GROUP BY T1.student_id ORDER BY COUNT(*) DESC LIMIT 1",
+      "generated": "SELECT T1.student_id,  T1.first_name,  T1.middle_name,  T1.last_name,  count(*),  T2.student_id FROM Student_Enrolment AS T1 JOIN Students AS T2 ON T1.student_id  =  T2.student_id GROUP BY T1.student_id ORDER BY count(*) DESC LIMIT 1",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 4287.2
+    },
+    {
+      "question": "Which grade has the most high schoolers?",
+      "reference": "SELECT grade FROM Highschooler GROUP BY grade ORDER BY COUNT(*) DESC LIMIT 1",
+      "generated": "SELECT grade FROM Highschooler GROUP BY grade ORDER BY count(*) DESC LIMIT 1",
+      "valid": true,
+      "exact": true,
+      "similarity": 1.0,
+      "latency_ms": 1021.0
+    },
+    {
+      "question": "What are the different continents and the total popuation and average life expectancy corresponding to each, for continents that have an average life expectancy less than 72?",
+      "reference": "SELECT SUM(Population) , AVG(LifeExpectancy) , Continent FROM country GROUP BY Continent HAVING AVG(LifeExpectancy) < 72",
+      "generated": "SELECT T1.Continent,  sum(T2.Population),  avg(T2.LifeExpectancy) FROM country AS T1 JOIN city AS T2 ON T1.CountryCode  =  T2.CountryCode GROUP BY T1.Continent HAVING avg(T2.LifeExpectancy)  <  72",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.925,
+      "latency_ms": 3768.2
+    },
+    {
+      "question": "Which countries' tv channels are not playing any cartoon written by Todd Casey?",
+      "reference": "SELECT country FROM TV_Channel EXCEPT SELECT T1.country FROM TV_Channel AS T1 JOIN cartoon AS T2 ON T1.id = T2.Channel WHERE T2.written_by = 'Todd Casey'",
+      "generated": "SELECT country FROM tv_channel EXCEPT SELECT T2.country FROM cartoon AS T1 JOIN tv_channel AS T2 ON T1.channel  =  T2.id JOIN cartoon AS T3 ON T3.id  =  T1.cartoon WHERE T3.directed_by  =  \"Todd Casey",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 2588.9
+    },
+    {
+      "question": "Find the id of students who do not have a cat pet.?",
+      "reference": "SELECT stuid FROM student EXCEPT SELECT T1.stuid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid JOIN pets AS T3 ON T3.petid = T2.petid WHERE T3.pettype = 'cat'",
+      "generated": "SELECT stuid FROM has_pet WHERE petType  =  \"cat\" EXCEPT SELECT stuid FROM has_pet WHERE petType  =  \"dog",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.583,
+      "latency_ms": 1416.7
+    },
+    {
+      "question": "Find the weight of the youngest dog.?",
+      "reference": "SELECT weight FROM pets ORDER BY pet_age LIMIT 1",
+      "generated": "SELECT min(weight) FROM pets WHERE pettype  =  \"dog",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.64,
+      "latency_ms": 651.9
+    },
+    {
+      "question": "List the language used least number of TV Channel. List language and number of TV Channel.?",
+      "reference": "SELECT LANGUAGE , COUNT(*) FROM TV_Channel GROUP BY LANGUAGE ORDER BY COUNT(*) ASC LIMIT 1",
+      "generated": "SELECT LANGUAGE,  count(*) FROM TV_channel GROUP BY LANGUAGE ORDER BY count(*) ASC LIMIT 1",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 1126.7
+    },
+    {
+      "question": "What is the average age of the visitors whose membership level is not higher than 4?",
+      "reference": "SELECT AVG(age) FROM visitor WHERE Level_of_membership <= 4",
+      "generated": "SELECT avg(age) FROM visitor WHERE Level_of_membership  <=  4",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 718.4
+    },
+    {
+      "question": "How many singers do we have?",
+      "reference": "SELECT COUNT(*) FROM singer",
+      "generated": "SELECT count(*) FROM singer",
+      "valid": true,
+      "exact": true,
+      "similarity": 1.0,
+      "latency_ms": 411.8
+    },
+    {
+      "question": "What are the first, middle, and last names for everybody enrolled in a Bachelors program?",
+      "reference": "SELECT DISTINCT T1.first_name , T1.middle_name , T1.last_name FROM Students AS T1 JOIN Student_Enrolment AS T2 ON T1.student_id = T2.student_id JOIN Degree_Programs AS T3 ON T2.degree_program_id = T3.degree_program_id WHERE T3.degree_summary_name = 'Bachelor'",
+      "generated": "SELECT T1.first_name,  T1.middle_name,  T1.last_name FROM Students AS T1 JOIN Student_Enrolment AS T2 ON T1.student_id  =  T2.student_id JOIN Degree_Programs AS T3 ON T3.degree_program_id  =  T2.degree_program_id WHERE T3.degree_program_name  =  \"Bachelors",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.8,
+      "latency_ms": 3317.3
+    },
+    {
+      "question": "Which professionals live in the state of Indiana or have done treatment on more than 2 treatments? List his or her id, last name and cell phone.?",
+      "reference": "SELECT professional_id , last_name , cell_number FROM Professionals WHERE state = 'Indiana' UNION SELECT T1.professional_id , T1.last_name , T1.cell_number FROM Professionals AS T1 JOIN Treatments AS T2 ON T1.professional_id = T2.professional_id GROUP BY T1.professional_id HAVING COUNT(*) > 2",
+      "generated": "SELECT T1.professional_id,  T1.last_name,  T1.cell_number FROM Professionals AS T1 JOIN Professionals AS T2 ON T1.professional_id  =  T2.professional_id JOIN Treatment_types AS T3 ON T1.professional_id  =  T3.professional_id JOIN Treatments AS T4 ON T3.treatment_type_id  =  T4.treatment_type_id GROUP BY T1.professional_id HAVING count(*)  >  2 AND T1.city  =  \"Indiana\" OR T1.city  =  \"Indianapolis\" OR T1.city  =  \"Fort Wayne\" OR T1.city  =  \"South Bend\" OR T1.city  =",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.914,
+      "latency_ms": 6577.0
+    },
+    {
+      "question": "Which airlines have departures from CVO but not from APG airports?",
+      "reference": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid = T2.Airline WHERE T2.SourceAirport = \"CVO\" EXCEPT SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid = T2.Airline WHERE T2.SourceAirport = \"APG\"",
+      "generated": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.Airline  =  T2.Airline WHERE T2.DepartureAirport  =  \"CVO\" EXCEPT SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.Airline  =  T2.Airline WHERE T2.DepartureAirport  =  \"APG",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 4277.6
+    },
+    {
+      "question": "Find the total amount of bonus given in all the evaluations.?",
+      "reference": "SELECT SUM(bonus) FROM evaluation",
+      "generated": "SELECT sum(bonus) FROM evaluation",
+      "valid": true,
+      "exact": true,
+      "similarity": 1.0,
+      "latency_ms": 531.1
+    },
+    {
+      "question": "Show the name of the conductor that has conducted the most number of orchestras.?",
+      "reference": "SELECT T1.Name FROM conductor AS T1 JOIN orchestra AS T2 ON T1.Conductor_ID = T2.Conductor_ID GROUP BY T2.Conductor_ID ORDER BY COUNT(*) DESC LIMIT 1",
+      "generated": "SELECT T2.Name FROM performance AS T1 JOIN conductor AS T2 ON T1.Conductor  =  T2.ID GROUP BY T2.Name ORDER BY count(*) DESC LIMIT 1",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.8,
+      "latency_ms": 1826.1
+    },
+    {
+      "question": "What are the names of the singers whose birth years are either 1948 or 1949?",
+      "reference": "SELECT Name FROM singer WHERE Birth_Year = 1948 OR Birth_Year = 1949",
+      "generated": "SELECT Name FROM singer WHERE Birth_Year  =  1948 OR Birth_Year  =  1949",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 1158.7
+    },
+    {
+      "question": "Whose permanent address is different from his or her current address? List his or her first name.?",
+      "reference": "SELECT first_name FROM Students WHERE current_address_id != permanent_address_id",
+      "generated": "SELECT DISTINCT T1.first_name FROM Addresses AS T1 JOIN Student_Enrolment AS T2 ON T1.address_id  =  T2.address_id WHERE T1.address_id !=  T2.address_id AND T1.line_1 !=  T2.line_1 AND T1.line_2 !=  T2.line_2 AND T1.line_1 !=  T2.line_2 AND T1.line_2 !=  T2.line_1 AND T1.line_1 !=  T2.line_2 AND T1.line_2 !=  T2.line_1 AND T1.line_2 !=  T2.line_1 AND T1.line_1 !=",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.36,
+      "latency_ms": 5999.4
+    },
+    {
+      "question": "How many TV Channel using language English?",
+      "reference": "SELECT COUNT(*) FROM TV_Channel WHERE LANGUAGE = \"English\"",
+      "generated": "SELECT count(*) FROM TV_channel WHERE LANGUAGE  =  \"English",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 648.8
+    },
+    {
+      "question": "What is the average age of all the dogs?",
+      "reference": "SELECT AVG(age) FROM Dogs",
+      "generated": "SELECT avg(age) FROM dogs",
+      "valid": true,
+      "exact": true,
+      "similarity": 1.0,
+      "latency_ms": 412.5
+    },
+    {
+      "question": "What are the record companies of orchestras in descending order of years in which they were founded?",
+      "reference": "SELECT Record_Company FROM orchestra ORDER BY Year_of_Founded DESC",
+      "generated": "SELECT Record_Company FROM orchestra ORDER BY Year_of_Founded DESC",
+      "valid": true,
+      "exact": true,
+      "similarity": 1.0,
+      "latency_ms": 596.5
+    },
+    {
+      "question": "Give the names of poker players who have earnings above 300000.?",
+      "reference": "SELECT T1.Name FROM people AS T1 JOIN poker_player AS T2 ON T1.People_ID = T2.People_ID WHERE T2.Earnings > 300000",
+      "generated": "SELECT Name FROM poker_player WHERE Earnings  >  300000",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.65,
+      "latency_ms": 650.3
+    },
+    {
+      "question": "How many official languages does Afghanistan have?",
+      "reference": "SELECT COUNT(*) FROM country AS T1 JOIN countrylanguage AS T2 ON T1.Code = T2.CountryCode WHERE T1.Name = \"Afghanistan\" AND IsOfficial = \"T\"",
+      "generated": "SELECT count(*) FROM countrylanguage WHERE CountryCode  =  \"AF\" AND LANGUAGE  =  \"Official",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.68,
+      "latency_ms": 1027.0
+    },
+    {
+      "question": "What are the full names of all players, sorted by birth date?",
+      "reference": "SELECT first_name , last_name FROM players ORDER BY birth_date",
+      "generated": "SELECT first_name,  last_name FROM players ORDER BY birth_date ASC",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 679.2
+    },
+    {
+      "question": "Count the number of United Airlines flights arriving in ASY Airport.?",
+      "reference": "SELECT COUNT(*) FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T2.Airline = T1.uid WHERE T1.Airline = \"United Airlines\" AND T2.DestAirport = \"ASY\"",
+      "generated": "SELECT count(*) FROM Flights AS T1 JOIN AIRLINES AS T2 ON T1.Airline  =  T2.Airline WHERE T2.Airline  =  \"United\" AND T1.ArrivalAirport  =  \"ASY",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 2395.2
+    },
+    {
+      "question": "What is the average weight and year for each year?",
+      "reference": "SELECT AVG(Weight) , YEAR FROM CARS_DATA GROUP BY YEAR",
+      "generated": "SELECT avg(Weight),  avg(YEAR),  YEAR FROM cars_data GROUP BY YEAR",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 1002.7
+    },
+    {
+      "question": "Return the average earnings across all poker players.?",
+      "reference": "SELECT AVG(Earnings) FROM poker_player",
+      "generated": "SELECT avg(Earnings) FROM poker_player",
+      "valid": true,
+      "exact": true,
+      "similarity": 1.0,
+      "latency_ms": 439.7
+    },
+    {
+      "question": "What model has the most different versions?",
+      "reference": "SELECT Model FROM CAR_NAMES GROUP BY Model ORDER BY COUNT(*) DESC LIMIT 1",
+      "generated": "SELECT Model FROM Model_List GROUP BY Model ORDER BY COUNT(*) DESC LIMIT 1",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.6,
+      "latency_ms": 868.3
+    },
+    {
+      "question": "What are the codes of countries with more than 50 players?",
+      "reference": "SELECT country_code FROM players GROUP BY country_code HAVING COUNT(*) > 50",
+      "generated": "SELECT country_code FROM players GROUP BY country_code HAVING count(*)  >  50",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 833.0
+    },
+    {
+      "question": "What is the id of the pet owned by the student whose last name is 'Smith'?",
+      "reference": "SELECT T2.petid FROM student AS T1 JOIN has_pet AS T2 ON T1.stuid = T2.stuid WHERE T1.Lname = 'Smith'",
+      "generated": "SELECT petid FROM has_pet AS T1 JOIN student AS T2 ON T1.stuid  =  T2.stuid WHERE T2.lname  =  'Smith",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 1681.6
+    },
+    {
+      "question": "Return the type code of the template type with the description \"Book\".?",
+      "reference": "SELECT template_type_code FROM Ref_template_types WHERE template_type_description = \"Book\"",
+      "generated": "SELECT template_type_code FROM Ref_template_types WHERE template_type_description  =  \"Book",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 770.0
+    },
+    {
+      "question": "What is Weekly Rank of TV series with Episode \"A Love of a Lifetime\"?",
+      "reference": "SELECT Weekly_Rank FROM TV_series WHERE Episode = \"A Love of a Lifetime\"",
+      "generated": "SELECT Weekly_Rank FROM TV_series WHERE Episode  =  \"A Love of a Lifetime",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 899.1
+    },
+    {
+      "question": "How many courses are there?",
+      "reference": "SELECT COUNT(*) FROM Courses",
+      "generated": "SELECT count(*) FROM Courses",
+      "valid": true,
+      "exact": true,
+      "similarity": 1.0,
+      "latency_ms": 345.9
+    },
+    {
+      "question": "List all airline names and their abbreviations in \"USA\".?",
+      "reference": "SELECT Airline , Abbreviation FROM AIRLINES WHERE Country = \"USA\"",
+      "generated": "SELECT T1.Airline,  T1.Abbreviation FROM AIRLINES AS T1 JOIN AIRPORTS AS T2 ON T1.Airline  =  T2.Airline WHERE T2.Country  =  \"USA\" GROUP BY T1.Airline,  T1.Abbreviation",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.8,
+      "latency_ms": 2647.2
+    },
+    {
+      "question": "What are the names of the teachers whose hometown is not `` Little Lever Urban District '' ?",
+      "reference": "SELECT name FROM teacher WHERE hometown != \"little lever urban district\"",
+      "generated": "SELECT Name FROM teacher WHERE Hometown!= \"Little Lever Urban District",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 624.1
+    },
+    {
+      "question": "What grade is Kyle in?",
+      "reference": "SELECT grade FROM Highschooler WHERE name = \"Kyle\"",
+      "generated": "SELECT grade FROM Highschooler WHERE name = \"Kyle",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 526.3
+    },
+    {
+      "question": "Show the years in which orchestras that have given more than one performance are founded.?",
+      "reference": "SELECT Year_of_Founded FROM orchestra AS T1 JOIN performance AS T2 ON T1.Orchestra_ID = T2.Orchestra_ID GROUP BY T2.Orchestra_ID HAVING COUNT(*) > 1",
+      "generated": "SELECT Year_of_Founded FROM orchestra GROUP BY Year_of_Founded HAVING COUNT(*)  >  1",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.7,
+      "latency_ms": 956.6
+    },
+    {
+      "question": "What is the average earnings of poker players with height higher than 200?",
+      "reference": "SELECT AVG(T2.Earnings) FROM people AS T1 JOIN poker_player AS T2 ON T1.People_ID = T2.People_ID WHERE T1.Height > 200",
+      "generated": "SELECT avg(Earnings) FROM poker_player WHERE Height  >  200",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.68,
+      "latency_ms": 681.6
+    },
+    {
+      "question": "How many transcripts are listed?",
+      "reference": "SELECT COUNT(*) FROM Transcripts",
+      "generated": "SELECT count(*) FROM Transcript_Contents",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.6,
+      "latency_ms": 398.5
+    },
+    {
+      "question": "What are the names of airports in Aberdeen?",
+      "reference": "SELECT AirportName FROM AIRPORTS WHERE City = \"Aberdeen\"",
+      "generated": "SELECT AirportName FROM Airports WHERE City  =  \"Aberdeen",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 698.1
+    },
+    {
+      "question": "What are the locations and names of all stations with capacity between 5000 and 10000?",
+      "reference": "SELECT LOCATION , name FROM stadium WHERE capacity BETWEEN 5000 AND 10000",
+      "generated": "SELECT LOCATION,  name FROM stadium WHERE capacity BETWEEN 5000 AND 10000",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 938.2
+    },
+    {
+      "question": "What is the name and capacity of the stadium with the most concerts after 2013 ?",
+      "reference": "SELECT t2.name , t2.capacity FROM concert AS t1 JOIN stadium AS t2 ON t1.stadium_id = t2.stadium_id WHERE t1.year > 2013 GROUP BY t2.stadium_id ORDER BY COUNT(*) DESC LIMIT 1",
+      "generated": "SELECT T1.name,  T1.capacity FROM stadium AS T1 JOIN concert AS T2 ON T1.location  =  T2.location WHERE T2.year  >  2013 GROUP BY T1.name ORDER BY count(*) DESC LIMIT 1",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 2307.5
+    },
+    {
+      "question": "What are the different names of the singers that have sales more than 300000?",
+      "reference": "SELECT DISTINCT T1.Name FROM singer AS T1 JOIN song AS T2 ON T1.Singer_ID = T2.Singer_ID WHERE T2.Sales > 300000",
+      "generated": "SELECT Name FROM singer WHERE Sales  >  300000 GROUP BY Name INTERSECT SELECT Name FROM singer WHERE Sales  >  300000 GROUP BY Name",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.5,
+      "latency_ms": 1485.9
+    },
+    {
+      "question": "Which first names are used for professionals or owners but are not used as dog names?",
+      "reference": "SELECT first_name FROM Professionals UNION SELECT first_name FROM Owners EXCEPT SELECT name FROM Dogs",
+      "generated": "SELECT first_name FROM Professionals EXCEPT SELECT first_name FROM Dogs INTERSECT SELECT first_name FROM Owners EXCEPT SELECT first_name FROM Professionals INTERSECT SELECT first_name FROM Owners",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 1527.0
+    },
+    {
+      "question": "Who is the first student to register? List the first name, middle name and last name.?",
+      "reference": "SELECT first_name , middle_name , last_name FROM Students ORDER BY date_first_registered ASC LIMIT 1",
+      "generated": "SELECT first_name,  middle_name,  last_name FROM Students ORDER BY student_id ASC LIMIT 1",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 1053.8
+    },
+    {
+      "question": "Return the template type description of the template type with the code AD.?",
+      "reference": "SELECT template_type_description FROM Ref_template_types WHERE template_type_code = \"AD\"",
+      "generated": "SELECT template_type_description FROM Ref_template_types WHERE template_type_code  =  \"AD.",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 863.1
+    },
+    {
+      "question": "Return the number of flights.?",
+      "reference": "SELECT COUNT(*) FROM FLIGHTS",
+      "generated": "SELECT count(*) FROM Flights",
+      "valid": true,
+      "exact": true,
+      "similarity": 1.0,
+      "latency_ms": 477.4
+    },
+    {
+      "question": "What are the names of the dogs for which the owner has not spend more than 1000 for treatment ?",
+      "reference": "SELECT name FROM dogs WHERE dog_id NOT IN ( SELECT dog_id FROM treatments GROUP BY dog_id HAVING SUM(cost_of_treatment) > 1000 )",
+      "generated": "SELECT T1.name FROM dogs AS T1 JOIN owners AS T2 ON T1.owner_id  =  T2.owner_id JOIN treatments AS T3 ON T1.treatment_id  =  T3.treatment_id WHERE T3.cost_of_treatment  <  1000 GROUP BY T1.name",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.743,
+      "latency_ms": 2664.4
+    },
+    {
+      "question": "Find the average age of students who do not have any pet .?",
+      "reference": "SELECT AVG(age) FROM student WHERE stuid NOT IN (SELECT stuid FROM has_pet)",
+      "generated": "SELECT avg(age) FROM student WHERE stuid NOT IN (SELECT stuid FROM has_pet)",
+      "valid": true,
+      "exact": true,
+      "similarity": 1.0,
+      "latency_ms": 823.3
+    },
+    {
+      "question": "How many flights do we have?",
+      "reference": "SELECT COUNT(*) FROM FLIGHTS",
+      "generated": "SELECT count(*) FROM Flights",
+      "valid": true,
+      "exact": true,
+      "similarity": 1.0,
+      "latency_ms": 371.0
+    },
+    {
+      "question": "What is the maximum and minimum share for the TV series?",
+      "reference": "SELECT MAX(SHARE) , MIN(SHARE) FROM TV_series",
+      "generated": "SELECT max(share),  min(share) FROM TV_series",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 658.7
+    },
+    {
+      "question": "How many templates do we have?",
+      "reference": "SELECT COUNT(*) FROM Templates",
+      "generated": "SELECT count(*) FROM Templates",
+      "valid": true,
+      "exact": true,
+      "similarity": 1.0,
+      "latency_ms": 378.4
+    },
+    {
+      "question": "Find all airlines that have fewer than 200 flights.?",
+      "reference": "SELECT T1.Airline FROM AIRLINES AS T1 JOIN FLIGHTS AS T2 ON T1.uid = T2.Airline GROUP BY T1.Airline HAVING COUNT(*) < 200",
+      "generated": "SELECT Airline FROM Flights GROUP BY Airline HAVING count(*)  <  200",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.7,
+      "latency_ms": 894.6
+    },
+    {
+      "question": "Find the name of the employee who got the highest one time bonus.?",
+      "reference": "SELECT t1.name FROM employee AS t1 JOIN evaluation AS t2 ON t1.Employee_ID = t2.Employee_ID ORDER BY t2.bonus DESC LIMIT 1",
+      "generated": "SELECT name FROM employee WHERE bonus  =  (SELECT max(bonus) FROM employee)",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.4,
+      "latency_ms": 770.2
+    },
+    {
+      "question": "What are the id, name and membership level of visitors who have spent the largest amount of money in total in all museum tickets?",
+      "reference": "SELECT t2.visitor_id , t1.name , t1.Level_of_membership FROM visitor AS t1 JOIN visit AS t2 ON t1.id = t2.visitor_id GROUP BY t2.visitor_id ORDER BY SUM(t2.Total_spent) DESC LIMIT 1",
+      "generated": "SELECT T1.id,  T1.name,  T1.Level_of_membership FROM visitor AS T1 JOIN visit AS T2 ON T1.id  =  T2.visitor_id GROUP BY T1.id ORDER BY sum(T2.Total_spent) DESC LIMIT 1",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 2434.2
+    },
+    {
+      "question": "Show the ids of high schoolers who have friends and are also liked by someone else.?",
+      "reference": "SELECT student_id FROM Friend INTERSECT SELECT liked_id FROM Likes",
+      "generated": "SELECT T1.id FROM Highschooler AS T1 JOIN Friend AS T2 ON T1.id  =  T2.friend_id JOIN Likes AS T3 ON T3.id  =  T2.id WHERE T1.grade  =  9 AND T3.student_id !=  T2.id GROUP BY T1.id HAVING count(*)  >  1",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.571,
+      "latency_ms": 3055.2
+    },
+    {
+      "question": "Return the money rank of the poker player with the greatest height.?",
+      "reference": "SELECT T2.Money_Rank FROM people AS T1 JOIN poker_player AS T2 ON T1.People_ID = T2.People_ID ORDER BY T1.Height DESC LIMIT 1",
+      "generated": "SELECT Money_Rank FROM poker_player ORDER BY Height DESC LIMIT 1",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.65,
+      "latency_ms": 663.5
+    },
+    {
+      "question": "Find the program which most number of students are enrolled in. List both the id and the summary.?",
+      "reference": "SELECT T1.degree_program_id , T1.degree_summary_name FROM Degree_Programs AS T1 JOIN Student_Enrolment AS T2 ON T1.degree_program_id = T2.degree_program_id GROUP BY T1.degree_program_id ORDER BY COUNT(*) DESC LIMIT 1",
+      "generated": "SELECT T1.degree_program_id,  T1.degree_summary_name FROM degree_programs AS T1 JOIN student_enrolment AS T2 ON T1.degree_program_id  =  T2.degree_program_id GROUP BY T1.degree_program_id ORDER BY count(*) DESC LIMIT 1",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 2384.0
+    },
+    {
+      "question": "Give the nationality that is most common across all people.?",
+      "reference": "SELECT Nationality FROM people GROUP BY Nationality ORDER BY COUNT(*) DESC LIMIT 1",
+      "generated": "SELECT Nationality FROM people GROUP BY Nationality ORDER BY COUNT(*) DESC LIMIT 1",
+      "valid": true,
+      "exact": true,
+      "similarity": 1.0,
+      "latency_ms": 803.4
+    },
+    {
+      "question": "Find the average life expectancy and total population for each continent where the average life expectancy is shorter than 72?",
+      "reference": "SELECT SUM(Population) , AVG(LifeExpectancy) , Continent FROM country GROUP BY Continent HAVING AVG(LifeExpectancy) < 72",
+      "generated": "SELECT avg(LifeExpectancy),  sum(Population),  Continent FROM city GROUP BY Continent HAVING avg(LifeExpectancy)  <  72",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.514,
+      "latency_ms": 1451.7
+    },
+    {
+      "question": "How many distinct nationalities are there?",
+      "reference": "SELECT COUNT(DISTINCT Nationality) FROM people",
+      "generated": "SELECT count(DISTINCT Nationality) FROM people",
+      "valid": true,
+      "exact": true,
+      "similarity": 1.0,
+      "latency_ms": 538.0
+    },
+    {
+      "question": "How many countries exist?",
+      "reference": "SELECT COUNT(*) FROM COUNTRIES",
+      "generated": "SELECT count(*) FROM Countries",
+      "valid": true,
+      "exact": true,
+      "similarity": 1.0,
+      "latency_ms": 328.5
+    },
+    {
+      "question": "What are the names and release years for all the songs of the youngest singer?",
+      "reference": "SELECT song_name , song_release_year FROM singer ORDER BY age LIMIT 1",
+      "generated": "SELECT T1.name,  T1.song_release_year FROM singer AS T1 JOIN singer_in_concert AS T2 ON T1.name  =  T2.singer JOIN concert AS T3 ON T2.concert  =  T3.concert_name WHERE T1.age  =  ( SELECT min(age) FROM singer ) ORDER BY T1.age ASC LIMIT 1",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.7,
+      "latency_ms": 3076.8
+    },
+    {
+      "question": "List the Episode of all TV series showed on TV Channel with series name \"Sky Radio\".?",
+      "reference": "SELECT T2.Episode FROM TV_Channel AS T1 JOIN TV_series AS T2 ON T1.id = T2.Channel WHERE T1.series_name = \"Sky Radio\"",
+      "generated": "SELECT T1.Episode FROM TV_series AS T1 JOIN TV_channel AS T2 ON T1.channel  =  T2.id WHERE T1.series_name  =  \"Sky Radio",
+      "valid": true,
+      "exact": false,
+      "similarity": 1.0,
+      "latency_ms": 1686.9
+    },
+    {
+      "question": "Find the kind of program which most number of students are enrolled in?",
+      "reference": "SELECT T1.degree_summary_name FROM Degree_Programs AS T1 JOIN Student_Enrolment AS T2 ON T1.degree_program_id = T2.degree_program_id GROUP BY T1.degree_summary_name ORDER BY COUNT(*) DESC LIMIT 1",
+      "generated": "SELECT degree_program_name FROM Student_Enrolment GROUP BY degree_program_name ORDER BY count(*) DESC LIMIT 1",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.629,
+      "latency_ms": 1093.7
+    },
+    {
+      "question": "What the smallest version number and its template type code?",
+      "reference": "SELECT MIN(Version_Number) , template_type_code FROM Templates",
+      "generated": "SELECT min(version_number),  template_type_code FROM Templates GROUP BY template_type_code ORDER BY min(version_number) LIMIT 1",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.76,
+      "latency_ms": 1164.4
+    },
+    {
+      "question": "How many degrees does the engineering department have?",
+      "reference": "SELECT COUNT(*) FROM Departments AS T1 JOIN Degree_Programs AS T2 ON T1.department_id = T2.department_id WHERE T1.department_name = 'engineer'",
+      "generated": "SELECT count(*) FROM Departments WHERE department_name  =  'Engineering",
+      "valid": true,
+      "exact": false,
+      "similarity": 0.68,
+      "latency_ms": 654.0
+    }
+  ]
+}

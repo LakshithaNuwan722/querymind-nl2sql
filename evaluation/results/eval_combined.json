@@ -1,0 +1,61 @@
+{
+  "eval_samples": 100,
+  "models": {
+    "base_8b": {
+      "name": "llama-3.1-8b-instant",
+      "type": "groq",
+      "label": "Base LLaMA 8B"
+    },
+    "finetuned": {
+      "name": "lakshitha722/querymind-nl2sql",
+      "type": "local",
+      "label": "Fine-tuned LLaMA 3B"
+    },
+    "base_70b": {
+      "name": "llama-3.3-70b-versatile",
+      "type": "groq",
+      "label": "Base LLaMA 70B"
+    }
+  },
+  "results": {
+    "base_8b": {
+      "label": "Base LLaMA 8B",
+      "total": 100,
+      "valid_sql_pct": 100.0,
+      "exact_match_pct": 14.0,
+      "avg_similarity": 0.816,
+      "high_sim_count": 68,
+      "high_sim_pct": 68.0,
+      "avg_latency_ms": 1993.0,
+      "total_tokens": 18292,
+      "avg_tokens": 182.9,
+      "errors": 0
+    },
+    "finetuned": {
+      "label": "Fine-tuned LLaMA 3B",
+      "total": 100,
+      "valid_sql_pct": 100.0,
+      "exact_match_pct": 19.0,
+      "avg_similarity": 0.863,
+      "high_sim_count": 77,
+      "high_sim_pct": 77.0,
+      "avg_latency_ms": 1539.8,
+      "total_tokens": 3463,
+      "avg_tokens": 34.6,
+      "errors": 0
+    },
+    "base_70b": {
+      "label": "Base LLaMA 70B",
+      "total": 100,
+      "valid_sql_pct": 100.0,
+      "exact_match_pct": 11.0,
+      "avg_similarity": 0.874,
+      "high_sim_count": 82,
+      "high_sim_pct": 82.0,
+      "avg_latency_ms": 2028.8,
+      "total_tokens": 18730,
+      "avg_tokens": 187.3,
+      "errors": 0
+    }
+  }
+}
