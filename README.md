@@ -81,7 +81,9 @@ We benchmarked our local **Fine-Tuned 3B model** against raw base models running
                             ▼
                SELECT count(*) FROM employee
 
-📁 Project Directory Structure
+```
+## 📁 Project Directory Structure
+```text
 querymind-nl2sql/
 ├── data/
 │   └── splits/             # Train/Val/Test JSONL datasets
@@ -94,11 +96,17 @@ querymind-nl2sql/
 │   └── requirements.txt    # HF Spaces cloud deployment requirements
 └── README.md
 
+```
+
 📉 Training Convergence
+```text
 Training Loss: ██▆▆▄▄▃▃▂▂▂▂▂ (Converged from 2.0 to 0.2640 ✅)
 Eval Loss:     ▁▃▅▆▇█         (Stabilized at 0.7673)
 
+```
+
 🧪 Sample Predictions
+```text
 <details> <summary><b>💡 Click to expand SQL Generation Examples</b></summary>
 Question  : How many employees are there?
 Schema    : Database: company | Tables: employees (id, name, department, salary)
@@ -111,9 +119,10 @@ Generated : SELECT department, AVG(salary) FROM employees GROUP BY department �
 Question  : Find products with price greater than 100
 Schema    : Database: store | Tables: products (id, name, price, category)
 Generated : SELECT name, price FROM products WHERE price > 100 ✅
+```
 
 👤 Author & Contact
-Lakshitha
+Lakshitha Wijekoon
 
 <p align="left"> <a href="huggingface.co/lakshitha722"> <img src="https://img.shields.io/badge/HuggingFace-lakshitha722-yellow?style=flat-square&logo=huggingface" /> </a> <a href="github.com/lakshithanuwan722"> <img src="https://img.shields.io/badge/GitHub-lakshithanuwan722-black?style=flat-square&logo=github" /> </a> <a href="[your-linkedin-url]"> <img src="https://img.shields.io/badge/LinkedIn-Profile-blue?style=flat-square&logo=linkedin" /> </a> </p>
 Built with ❤️ using LLaMA 3.2 + QLoRA + Unsloth
